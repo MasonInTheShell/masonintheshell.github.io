@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS 499 Capstone | Enhancement 3</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/images/graduation-hat.png" type="image/png">
+    <script src="assets/js/script.js"></script>
+  </head>
+  <body>
+    <main class="container">
+
+      <div class="topbar">
+        <a class="repo-button" href="https://github.com/MasonInTheShell/masonintheshell.github.io" target="_blank" rel="noopener">View entire repo</a>
+        <button id="theme-toggle" class="theme-toggle" type="button" role="switch" aria-checked="true">
+          <span>Night mode</span><span class="switch" aria-hidden="true"></span>
+        </button>
+      </div>
+ 
+      <header class="site-header">
+        <h1>CS 499 Capstone</h1>
+        <p class="page-title">Enhancement 3 - Databases</p>
+      </header>
+ 
+      <section>
+        <h3>Summary</h3>
+        <p>The artifact selected for the Software Engineering and Design category was originally developed in IT145: Found in
+          App Development. This is a Java-based rescue animal management application designed to support the intake, management
+          and reservation of rescue animals. The application uses object-oriented programming concepts including classes,
+          inheritance, encapsulation and collections. The application contains a base RescueAnimal class with Dog and Monkey
+          subclasses and uses Java ArrayList collections to store animal information. The original applications functionality is
+          concentrated in the Driver class. The Driver class displays the user interface, collects and validates input, creates
+          animal objects, searches through the collections, processes reservations and directly manages the application’s data.
+          This artifact was then transformed during the software engineering and design enhancement to reduce coupling and
+          increase modularity and separation of concerns.</p>
+        
+        <h3>Justification</h3>
+        <p>I selected this artifact because the rescue animal management system is fundamentally about storing and retrieving
+          data, yet the original version kept everything in an in-memory ArrayList, so all information was lost whenever the
+          program closed. That made it a natural fit for the database enhancement, and it let me demonstrate database
+          fundamentals alongside the ability to build a complete solution from the ground up with security in mind. I designed a
+          relational MySQL schema that mirrors the class hierarchy, connected it to the application through JDBC, and
+          implemented a JdbcAnimalRepository that plugs into the existing layered architecture, so the service and UI layers
+          needed only minimal changes. The artifact shows my ability to implement full CRUD functionality with
+          PreparedStatements, map result sets to Java objects, use transactions so related inserts succeed or fail together, and
+          handle errors gracefully. I also documented the setup in a quick start guide so others can reproduce the project on
+          their own systems. Compared to the original, the application now persists data between sessions, uses appropriate data
+          types, validates user input, and restricts database access through a least-privilege account.</p>
+        
+        <h3>Reflection</h3>
+        <p>This was the longest enhancement, mostly because of its volume rather than its difficulty. In my previous database
+          courses, the environment was already set up in a virtual platform like Codio, so building and connecting a local
+          environment was new to me. It took some research to learn which tools I needed and how to set them up: MySQL Server,
+          MySQL Workbench, and Connector/J, followed by the imports, the application user and the properties file. Once that
+          stack was running and I was writing actual SQL statements and queries, the work felt much more familiar.</p>
+        <p>
+          The rest of the challenge was converting the codebase to work with persistent storage. I had to add much more
+          validation logic to the console UI than I wanted to, but it was necessary to prevent type mismatches such as strings
+          going into numeric or date columns, since everything in the previous build was a String. There was also a lot of SQL
+          exception handling to account for, and error handling was the name of the game, as the try-catch blocks show. The
+          biggest challenge was simply the volume of work, which I could have reduced by starting earlier and spreading the
+          environment setup and the many prepared statements over more time. My biggest learning moments were configuring my
+          first local MySQL environment and learning how prepared statements prevent SQL injection.
+        </p>
+        <h3>Course Outcomes Met</h3>
+        <p><strong>
+            “Demonstrate an ability to use well-founded and innovative techniques, skills, and tools in computing practices for
+            the purpose of implementing computer solutions that deliver value and accomplish industry-specific goals.”
+          </strong></p>
+        <p>
+          This enhancement demonstrates this outcome by integrating MySQL, SQL and JDBC into an existing Java application to
+          solve a practical limitation of the original system. Rather than storing rescue animal information only in Java
+          collections, the enhanced application uses a persistent relational database, so information persists between sessions.
+          The implementation shows practical use of industry-relevant database technologies to improve the functionality,
+          reliability, and maintainability of an existing solution. In a real-world scenario, it would give the organization a
+          permanent storage solution in place of its old system.
+        </p>
+        <p><strong>
+            “Develop a security mindset that anticipates adversarial exploits in software architecture and designs to expose
+            potential vulnerabilities, mitigate design flaws, and ensure privacy and enhanced security of data and resources.”
+          </strong></p>
+        <p>
+          This outcome is demonstrated through parameterized SQL and JDBC PreparedStatement objects for all user-provided
+          information, which prevents user input from being incorporated directly into executable SQL and reduces exposure to
+          SQL injection. Database constraints (primary and foreign keys, a unique name, NOT NULL and CHECK rules) and a
+          relational design protect data integrity and reduce the possibility of invalid or inconsistent records. Database
+          errors are handled with try-catch blocks and a custom exception, so users see a generic message instead of raw
+          database details. Credentials are kept in a configuration file instead of the source code, and the application
+          connects through a dedicated account with only the permissions it needs, following the principle of least privilege.
+        </p>
+      </section>
+ 
+        <section class="repo-link">
+          <h2>GitHub repository</h2>
+          <p><a href="https://github.com/your-username/your-repo" target="_blank" rel="noopener">View the code for this enhancement on GitHub</a></p>
+        </section>
+ 
+      <nav class="portfolio-links" aria-label="Portfolio links">
+        <h2>Portfolio links</h2>
+        <ul>
+          <li><a href="index.html">Overview</a></li>
+          <li><a href="code-review.html">Code review</a></li>
+          <li><a href="enhancement-1.html">Enhancement 1</a></li>
+          <li><a href="enhancement-2.html">Enhancement 2</a></li>
+          <li><a href="enhancement-3.html" aria-current="page">Enhancement 3</a></li>
+        </ul>
+      </nav>
+
+      <footer class="site-footer">
+        <p><a href="https://www.flaticon.com/free-icons/computer-science" title="computer science icons">Computer science icons created by Smashicons - Flaticon</a></p>
+      </footer>
+ 
+    </main>
+  </body>
+</html>
